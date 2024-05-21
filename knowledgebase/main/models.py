@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils.text import slugify
-
+from unidecode import unidecode
 
 class Category(models.Model):
     name = models.CharField(max_length=3)
@@ -9,7 +9,8 @@ class Category(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slugify(self.name)
+            # Использование unidecode для преобразования любого Unicode текста в ASCII
+            self.slug = slugify(unidecode(self.name))
         super(Category, self).save(*args, **kwargs)
 
     def __str__(self):
@@ -23,7 +24,8 @@ class Subcategory(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slugify(self.name)
+            # Использование unidecode для преобразования любого Unicode текста в ASCII
+            self.slug = slugify(unidecode(self.name))
         super(Subcategory, self).save(*args, **kwargs)
 
     def __str__(self):
@@ -41,7 +43,8 @@ class Article(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slugify(self.title)
+            # Использование unidecode для преобразования любого Unicode текста в ASCII
+            self.slug = slugify(unidecode(self.title))
         super(Article, self).save(*args, **kwargs)
 
     def __str__(self):
