@@ -7,7 +7,8 @@
                 <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
                     <ol class="breadcrumb">
                       <li class="breadcrumb-item"><a href="{% url 'home' %}">База знаний</a></li>
-                      <li class="breadcrumb-item"><a href="{% url 'category_page' slug=subcategory.category.slug %}">{{ subcategory.category.main_name }}</a></li>
+                      <li class="breadcrumb-item"><a href="">категория</a></li>
+                      <li class="breadcrumb-item"><a href="">Подкатегория</a></li>
                       <li class="breadcrumb-item active" aria-current="page">{{ subcategory.name }}</li>
                     </ol>
                 </nav>
@@ -23,26 +24,8 @@
             </div>
             <div class="row g-5 p-4">
                 <div class="col-12">
-                    <h1>{{ subcategory.name }}</h1>
+                    <h1>123123123</h1>
                 </div>
-
-                {% for article in articles %}
-                    <div class="col-12">
-                        <div class="subcategory">
-                            <div>
-                                <div class="date">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar-heart-fill" viewBox="0 0 16 16">
-                                      <path d="M4 .5a.5.5 0 0 0-1 0V1H2a2 2 0 0 0-2 2v1h16V3a2 2 0 0 0-2-2h-1V.5a.5.5 0 0 0-1 0V1H4V.5ZM16 14V5H0v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2ZM8 7.993c1.664-1.711 5.825 1.283 0 5.132-5.825-3.85-1.664-6.843 0-5.132Z"/>
-                                    </svg>
-                                    <p class="ms-3">Опубликовано: {{ article.created_at }}, Обновлено: {{ article.updated_at }}</p>
-                                </div>
-                                <p class="subcategory-h3">{{ article.title }}</p>
-                                <p>{{ article.description }}</p>
-                            </div>
-                            <a class="sub-link" href="#">Читать</a>
-                        </div>
-                    </div>
-                {% endfor %}
 
             </div>
         </div>
