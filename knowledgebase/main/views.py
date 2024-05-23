@@ -4,7 +4,6 @@ from .models import *
 
 def home(request):
     categories = Category.objects.all()
-
     context = {
         'categories': categories,
     }
@@ -34,10 +33,11 @@ def subcategories(request, category_slug, subcategory_slug):
 
 def article_page(request, category_slug, subcategory_slug, article_slug):
     category = get_object_or_404(Category, slug=category_slug)
-    subcategory = get_object_or_404(Subcategory, slug=article_slug)
-    article = Article.objects.get(slug=subcategory_slug)
+    subcategory = get_object_or_404(Subcategory, slug=subcategory_slug, category=category)
+    article = get_object_or_404(Article, slug=article_slug, subcategory=subcategory)
     context = {
+        'category': category,
         'subcategory': subcategory,
         'article': article,
     }
-    return render(request, 'main/subcategory.html', context)
+    return render(request, 'main/article-page.html', context)

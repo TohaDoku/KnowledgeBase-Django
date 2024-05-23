@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.text import slugify
 from unidecode import unidecode
+from ckeditor_uploader.fields import RichTextUploadingField
 
 class Category(models.Model):
     name = models.CharField(max_length=3)
@@ -36,14 +37,15 @@ class Article(models.Model):
     subcategory = models.ForeignKey(Subcategory, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     description = models.CharField(max_length=1200)
-    content = models.TextField()
+    content = RichTextUploadingField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     slug = models.SlugField(unique=True, max_length=200, blank=True)
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            # Использование unidecode для преобразования любого Unicode текста в ASCII
+            from unidecode import unidecode
+            from django.utils.text import slugify
             self.slug = slugify(unidecode(self.title))
         super(Article, self).save(*args, **kwargs)
 
